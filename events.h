@@ -29,9 +29,16 @@ void initEvent(void (*callback)());
 
 /*
 * Invokes the event loop. Does not return
+* The delay is managed by the callback
 */
-
 void eventLoop();
+
+
+/*
+* Performs all actions for one tick. 
+* Can be used for a timer/interrupt driven schedule 
+*/
+void eventLoopInterrupt();
 
 /*
 * Registers an event in the handler. The arguments from and to describe the intervall the callback

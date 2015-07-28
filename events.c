@@ -118,10 +118,9 @@ void recallEvent(unsigned ticks) {
 	currentEvent->nextInvoke = ticks;
 }
 
-void eventLoop() {
-	Event *previousEvent, *tmp;
 
- head: //You spin my head right round, right round
+void eventLoopInterrupt() {
+	Event *previousEvent, *tmp;
 	currentEvent = listEventHead;
 	previousEvent = NULL;
 
@@ -156,5 +155,10 @@ void eventLoop() {
 	processPendingEvents();
 	if(tickCallback != NULL)
 		tickCallback();
+}
+
+void eventLoop() {
+ head: //You spin my head right round, right round
+	eventLoopInterrupt();
  goto head; //when you go down, when you go down
 }
